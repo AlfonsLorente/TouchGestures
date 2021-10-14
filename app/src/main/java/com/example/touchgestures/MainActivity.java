@@ -1,59 +1,96 @@
 package com.example.touchgestures;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.core.view.GestureDetectorCompat;
 
+import com.example.touchgestures.R;
+
+public class MainActivity extends Activity implements
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener{
+
+    private static final String DEBUG_TAG = "Gestures";
+    private GestureDetectorCompat mDetector;
+
+    // Called when the activity is first created.
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Instantiate the gesture detector with the
+        // application context and an implementation of
+        // GestureDetector.OnGestureListener
+        mDetector = new GestureDetectorCompat(this,this);
+        // Set the gesture detector as the double tap
+        // listener.
+        mDetector.setOnDoubleTapListener(this);
     }
 
-    /*
-    public boolean onTouchEvent(MotionEvent motionEvent){
-        int action = motionEvent.getActionMasked();
-        switch (action){
-            case(MotionEvent.ACTION_DOWN):
-                Toast.makeText(this, "Action was DOWN", Toast.LENGTH_SHORT).show();
-                return true;
-            case(MotionEvent.ACTION_MOVE):
-                Toast.makeText(this, "Action was MOVE", Toast.LENGTH_SHORT).show();
-                return true;
-            case(MotionEvent.ACTION_UP):
-                Toast.makeText(this, "Action was UP", Toast.LENGTH_SHORT).show();
-                return true;
-            case(MotionEvent.ACTION_CANCEL):
-                Toast.makeText(this, "Action was CANCEL", Toast.LENGTH_SHORT).show();
-                return true;
-            case(MotionEvent.ACTION_OUTSIDE):
-                Toast.makeText(this, "Movement occurred outside bounds " +
-                        "of current screen element", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onTouchEvent(motionEvent);
-
-        }
-
-    }
-
-     */
-    /*
-    View myView = findViewById(R.id.myView);
-    myView.setOnTouchListener(new OnTouchListener() {
-        public boolean onTouch(View v, MotionEvent event) {
-            // ... Respond to touch events
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        if (this.mDetector.onTouchEvent(event)) {
             return true;
         }
-    });
+        return super.onTouchEvent(event);
+    }
 
-    */
+    @Override
+    public boolean onDown(MotionEvent event) {
+        Log.d(DEBUG_TAG,"onDown: " + event.toString());
+        return true;
+    }
 
+    @Override
+    public boolean onFling(MotionEvent event1, MotionEvent event2,
+                           float velocityX, float velocityY) {
+        Log.d(DEBUG_TAG, "onFling: " + event1.toString() + event2.toString());
+        return true;
+    }
 
+    @Override
+    public void onLongPress(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onLongPress: " + event.toString());
+    }
 
+    @Override
+    public boolean onScroll(MotionEvent event1, MotionEvent event2, float distanceX,
+                            float distanceY) {
+        Log.d(DEBUG_TAG, "onScroll: " + event1.toString() + event2.toString());
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onDoubleTapEvent(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onDoubleTapEvent: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        Log.d(DEBUG_TAG, "onSingleTapConfirmed: " + event.toString());
+        return true;
+    }
 }
+    
