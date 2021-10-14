@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /*
     public boolean onTouchEvent(MotionEvent motionEvent){
         int action = motionEvent.getActionMasked();
         switch (action){
@@ -37,6 +39,21 @@ public class MainActivity extends AppCompatActivity {
                 return super.onTouchEvent(motionEvent);
 
         }
+
     }
+
+     */
+    /*
+    View myView = findViewById(R.id.myView);
+    myView.setOnTouchListener(new OnTouchListener() {
+        public boolean onTouch(View v, MotionEvent event) {
+            // ... Respond to touch events
+            return true;
+        }
+    });
+
+    */
+
+
 
 }
